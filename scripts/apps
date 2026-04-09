@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+sleep 5
+
+#btop &
+#nvtop &
+
+sleep 5
+
+firefox &
+#obsidian &
+#spotify &
