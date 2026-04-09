@@ -1,38 +1,38 @@
-```
-░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓███████▓▒░░▒▓███████▓▒░  
-░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
-░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
-░▒▓████████▓▒░░▒▓██████▓▒░░▒▓███████▓▒░░▒▓███████▓▒░  
-░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
-░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
-░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
-```
+<img src="https://raw.githubusercontent.com/cybrcore/cybrcore/refs/heads/main/assets/repo-banners/cybr-hyprland-banner.png" height=200px/>
 
-<img src="../assets/inspiration/insp-hypr.png"/></td>
+# Showcase
+<img src="https://raw.githubusercontent.com/cybrcore/cybrcore/refs/heads/main/assets/showcase/cybr-hyprland-hero1.png">
 <p align="center">
-  <em>hypr ↗ (right: firefox; left top to bottom: firefox, emoji, powermenu, screenshot menu, wallpaper menu)</em>
+  <em>Left-to-right: Neovim, rofi-launcher, cava, fastfetch, custom script ↗</em>
 </p>
-<img src="../assets/inspiration/insp-hypr2.png"/></td>
+<br>
+<img src="https://raw.githubusercontent.com/cybrcore/cybrcore/refs/heads/main/assets/showcase/cybr-hyprland-hero2.png">
 <p align="center">
-  <em>hypr ↗ (foreground: firefox w/Cyberspace.online; background: cava)</em>
+  <em>Left-to-right: stacked micro, yazi, broot ↗</em>
 </p>
 
 > ![WARNING]
-> For Wallpaper switcher ([rofi](../rofi/readme.md)) to work as intended, you need latest hyprpaper.  
+> For Wallpaper switcher ([rofi](../rofi/readme.md)) to work as intended, you need latest `hyprpaper` -- update with `sudo pacman -Su hyprpaper`  
 > `CTRL + SUPER + W` launches the Wallpaper switcher, `ENTER` confirms the selection.
 > If the selected wallpaper gets stuck, you can reset the timer by repeatedly selecting the wallpaper again.
 
 # Steps
 ## 0. Before you start
-- Make sure [Geist Mono Nerd Font](../INSTALL.md#prerequisites--setup) is installed
+- Make sure [Geist Mono Nerd Font](https://www.nerdfonts.com/font-downloads) is installed, you can do that from terminal with:
+```bash
+curl -L https://github.com/ryanoasis/nerd-fonts/releases/latest/download/GeistMono.zip -o GeistMono.zip
+mkdir -p ~/.local/share/fonts
+unzip GeistMono.zip -d ~/.local/share/fonts/GeistMono
+fc-cache -fv
+```
 - Make sure hyprland is installed: `sudo pacman -S hyprland`
 - Make sure `git` is installed: `sudo pacman -S git`
-- See [Installation Guide](../INSTALL.md) if you haven't set up prerequisites yet
-- [Github](https://github.com/hyprwm/Hyprland) | [Arch Wiki](https://wiki.archlinux.org/title/Hyprland)
+- See [Installation Guide](https://github.com/cybrcore/cybrdots/blob/main/INSTALL.md) if you're coming from [cybr-hyprland](https://github.com/cybrcore/cybr-hyprland) and haven't set up prerequisites yet
+- [hyprland Github](https://github.com/hyprwm/Hyprland) | [Arch Wiki](https://wiki.archlinux.org/title/Hyprland)
 
 > [!IMPORTANT]
 > Hyprland should be updated to latest (*v0.53.1 or higher*) for the config to properly work.  
-> **If you already have Hyprland installed**: check your version with `hyprland -v` and either update or proceed with installation.
+> **If you already have Hyprland installed**: check your version with `hyprland -v` and either update with `sudo pacman -Su hyprland` or proceed with installation.
 
 
 ## 1. Backup existing config (if any)
@@ -42,9 +42,9 @@
 
 ## 2. Download and install hyprland configs
 ```sh
-git clone --depth=1 --filter=blob:none --no-checkout https://github.com/scherrer-txt/cybrland.git && cd cybrland && git sparse-checkout init --cone && git sparse-checkout set hypr && git checkout main && mv hypr ~/.config/ && cd ~ && rm -rf cybrland
+git clone --depth=1 --filter=blob:none --no-checkout https://github.com/cybrcore/cybr-hyprland.git && cd cybr-hyprland && git sparse-checkout init --cone && git sparse-checkout set hypr && git checkout main && mv hypr ~/.config/ && cd ~ && rm -rf cybr-hyprland
 ```
-↑ Unsure what this does? [Explanation](../INSTALL.md#How-sparse-checkout-works)  
+↑ Unsure what this does? [Explanation](https://github.com/cybrcore/cybrdots/blob/main/INSTALL.md#How-sparse-checkout-works)  
 
 ## 3. Verify installation
 ```sh
