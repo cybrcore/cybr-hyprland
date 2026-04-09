@@ -1,0 +1,3 @@
+[submodule "hypr"]
+	path = hypr
+	url = https://github.com/cybrcore/cybr-hyprland.git
