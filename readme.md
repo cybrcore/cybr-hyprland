@@ -12,6 +12,8 @@
 </p>
 
 > ![WARNING]
+> hyprland is in the process of switching from hyprlang to lua language. This config won't work as intended with newer versions (v0.55.0+). Last compatible version of hyprland is v0.54.3 from 2026-03-27. I will either wait a month until the new lua-based hyprland is stable or switch to something more stable in itself, I can't be bothered.  
+>  
 > For Wallpaper switcher ([rofi](../rofi/readme.md)) to work as intended, you need latest `hyprpaper` -- update with `sudo pacman -Su hyprpaper`  
 > `CTRL + SUPER + W` launches the Wallpaper switcher, `ENTER` confirms the selection.
 > If the selected wallpaper gets stuck, you can reset the timer by repeatedly selecting the wallpaper again.
