@@ -11,7 +11,7 @@
   <em>Left-to-right: stacked micro, yazi, broot ↗</em>
 </p>
 
-> ![WARNING]  
+> [!WARNING]  
 > hyprland is in the process of switching from hyprlang to lua language. This config won't work as intended with newer versions (v0.55.0+). Last compatible version of hyprland is v0.54.3 from 2026-03-27. I will either wait a month until the new lua-based hyprland is stable or switch to something more stable in itself, I can't be bothered.  
 >  
 > For Wallpaper switcher ([rofi](../rofi/readme.md)) to work as intended, you need latest `hyprpaper` -- update with `sudo pacman -Su hyprpaper`  
