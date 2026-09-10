@@ -11,12 +11,15 @@
   <em>Left-to-right: stacked micro, yazi, broot ↗</em>
 </p>
 
+> [!CAUTION]
+> Purpose of this repo has changed. As of now, it only serves the theme files (`theme.lua`, `colors.lua`, `variables.lua` and `/walls` wallpapers).  
+> There are no scripts, keybinds, windowrules, nor hypridle or hyprlock.  
+> Intended use case is "user has hyprland configured (either vanilla or modified) → user downloads files from this repo → user plugs downloaded files into their own hyprland config".  
+
 > [!WARNING]  
-> hyprland is in the process of switching from hyprlang to lua language. This config won't work as intended with newer versions (v0.55.0+). Last compatible version of hyprland is v0.54.3 from 2026-03-27. I will either wait a month until the new lua-based hyprland is stable or switch to something more stable in itself, I can't be bothered.  
->  
 > For Wallpaper switcher ([rofi](../rofi/readme.md)) to work as intended, you need latest `hyprpaper` -- update with `sudo pacman -Su hyprpaper`  
-> `CTRL + SUPER + W` launches the Wallpaper switcher, `ENTER` confirms the selection.
-> If the selected wallpaper gets stuck, you can reset the timer by repeatedly selecting the wallpaper again.
+> `CTRL + SUPER + W` launches the Wallpaper switcher, `ENTER` confirms the selection.  
+> If the selected wallpaper gets stuck, you can reset the timer by repeatedly selecting the wallpaper again.  
 
 # Steps
 ## 0. Before you start
@@ -33,9 +36,8 @@ fc-cache -fv
 - [hyprland Github](https://github.com/hyprwm/Hyprland) | [Arch Wiki](https://wiki.archlinux.org/title/Hyprland)
 
 > [!IMPORTANT]
-> Hyprland should be updated to latest (*v0.53.1 or higher*) for the config to properly work.  
+> Hyprland should be updated to latest (*v0.56.0 or higher*) for the config to properly work.  
 > **If you already have Hyprland installed**: check your version with `hyprland -v` and either update with `sudo pacman -Su hyprland` or proceed with installation.
-
 
 ## 1. Backup existing config (if any)
 ```sh
@@ -53,125 +55,48 @@ git clone --depth=1 --filter=blob:none --no-checkout https://github.com/cybrcore
 ls -R ~/.config/hypr
 ```
 
-You should see: `hyprland.conf`, `theme.conf`, `vars.conf`, `walls/` directory with `chyoda-2560x1440.png` and other pngs,  `scripts/` directory with `color_picker` and other scripts, `hypridle.conf`, `hyprlock.conf`, `hyprpaper.conf`, `hyprpicker.conf`, `pyprland.conf`,
+You should see: `cybr-hyprland.lua`, `theme.lua`, `variables.lua`, `walls/` directory with `chyoda-2560x1440.png` and other pngs, and `hyprpaper.conf`,
 
-Make all scripts executable:
-```sh
-chmod +x ~/.config/hypr/scripts/*
-```
-
-<details>
-<summary>Expected file structure</summary>
+### Expected file structure
 
 ```
 ~/.config/hypr/
-├── hyprland.conf           # main settings
-├── theme.conf              # theme settings
-├── vars.conf               # variables used in theme
+├── cybr-hyprland.lua       # main settings
+├── theme.lua               # theme settings
+├── vars.lua                # variables used in theme
+├── colors.lua              # colors used in theme
 └── walls/                  # wallpapers
-│   ├── chyoda-2560x1440.png
-│   ├── ikebukuro-2560x1440.png
-│   └── ...
-└── scripts/                # wallpapers
-│   ├── color_picker
-│   ├── current_song
-│   └── ...
-├── hypridle.conf           # settings for idle
-├── hyprlock.conf           # settings for screen lock
-├── hyprpaper.conf          # backup settings for wallpapers
-├── hyprpicker.conf         # settings for color picker
-└── pyprland.conf           # settings for wifi/bluetooth scratchpad
+    ├── chyoda-2560x1440.png
+    ├── ikebukuro-2560x1440.png
+    └── ...
 ```
-</details>
 
 ## 4. Configure for your system
-You'll need to change some settings in hyprland config to match your machine.
+Change the hyprland config so it sees the installed config files.
 
 ```sh
 $EDITOR ~/.config/hypr/hyprland.conf
 ```
 
-### a) Monitor setup
-Check your monitor configuration:
+Paste content of `cybr-hyprland.lua` at the top of your config file
+
+```lua
+---------------------------------------
+-- cybrcore    lucid hyprland config file
+-- Project:    https://github.com/cybrcore/cybr-hyprland
+-- Author:     scherrer-txt   |   License:     GPL-3.0
+-- Source:     ~/.config/hypr/hyprland.lua
+---------------------------------------
+
+configDir = os.getenv("HOME") .. "/.config/hypr"
+
+require("theme")
+
+-- Rest of your hyprland.lua config
+```
+
+## 5. Reload hyprland
+Final step is to reload the config with:
 ```sh
-hyprctl monitors
+hyprctl reload
 ```
-
-Example output:
-```
-Monitor DP-2 (ID 0):
-	2560x1440@144Hz at 1920x0
-Monitor HDMI-A-1 (ID 1):
-	1920x1080@60Hz at 0x0
-```
-
-Edit monitor settings:
-```sh
-$EDITOR ~/.config/hypr/hyprland.conf
-```
-
-Find the `# === MONITORS ===` section and update:
-```conf
-$first = # Change according to `hyprctl monitors` output
-# Example:
-# $first = DP-1
-# $second = DP-2
-# $third = HDMI-A-1
-
-monitor = $first,preferred,auto,1 # Change according to `hyprctl monitors` output
-# Example:
-# monitor = $first,2560x1440@144Hz,1920x0,1
-```
-
-Find the `# === WORKSPACES === #` section and update:
-
-```conf
-# First Monitor
-workspace = 1, monitor:$second, default:true
-...
-
-# Second Monitor
-workspace = 10, monitor:$first, default:true
-...
-
-# Third Monitor
-#workspace = 19, monitor:$third
-...
-```
-
-### b) Keyboard layout (optional)
-```sh
-$EDITOR ~/.config/hypr/hyprland.conf
-```
-
-Find `# === INPUT ===` and modify:
-```conf
-input {
-    kb_layout = us,cz
-    kb_options = compose:rctrl, level3:ralt_switch, grp:alt_space_toggle
-    ...
-}
-```
-
-### c) Keybinds (recommended)
-Review and customize keybinds in `# === BINDS ===` section. The config includes organized sections for:
-- Applications, Notifications, Bar
-- Pickers/Launchers, Screenshots
-- Window management (focus, move, resize)
-- Workspaces, Monitors
-- Media controls
-
-### d) Autostart apps
-```sh
-$EDITOR ~/.config/hypr/scripts/apps
-```
-Here you can define which apps should start on boot. I use sleep to give the OS some breathing room after startup.
-Comment out apps you don't want to launch on startup, add those you want.
-
-
-### e) Essential services
-```sh
-$EDITOR ~/.config/hypr/scripts/services
-```
-
-These are essential services for Hyprland to function properly.
